@@ -102,7 +102,7 @@ navLinks.forEach((link) => {
 
 galleryItems.forEach((item) => {
   item.addEventListener("click", () => {
-    openModal(Number(item.dataset.index), item);
+    openModal(Number(item.dataset.index));
   });
 });
 
@@ -123,16 +123,15 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("resize", resizeCanvas);
 
-function openModal(index, sourceElement) {
+function openModal(index) {
   showProduct(index, false);
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
   resizeCanvas();
 
-  const rect = sourceElement.getBoundingClientRect();
-  burstParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
   restartPopAnimation();
+  burstFromImageFrame();
 }
 
 function closeModal() {
@@ -159,8 +158,8 @@ function showProduct(index, animate) {
   modalDescription.textContent = product.description;
 
   if (animate) {
-    burstParticles(window.innerWidth / 2, window.innerHeight / 2);
     restartPopAnimation();
+    burstFromImageFrame();
   }
 }
 
@@ -175,23 +174,35 @@ function resizeCanvas() {
   canvas.height = window.innerHeight;
 }
 
-function burstParticles(x, y) {
+function burstFromImageFrame() {
+  requestAnimationFrame(() => {
+    const rect = modalImage.getBoundingClientRect();
+    burstFrameParticles(rect);
+  });
+}
+
+function burstFrameParticles(rect) {
   resizeCanvas();
   const colors = ["#176b5b", "#d99735", "#ffffff", "#8ec6b6", "#f2c879", "#ffe9a8"];
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
 
   shockwaves.push(
-    { x, y, radius: 16, speed: 13, life: 34, maxLife: 34, width: 8, color: "#ffffff" },
-    { x, y, radius: 8, speed: 9, life: 44, maxLife: 44, width: 3, color: "#d99735" },
+    { x: centerX, y: centerY, radius: Math.min(rect.width, rect.height) * 0.45, speed: 12, life: 32, maxLife: 32, width: 8, color: "#ffffff" },
+    { x: centerX, y: centerY, radius: Math.min(rect.width, rect.height) * 0.38, speed: 8, life: 42, maxLife: 42, width: 3, color: "#d99735" },
   );
 
-  for (let i = 0; i < 150; i += 1) {
-    const angle = Math.random() * Math.PI * 2;
+  for (let i = 0; i < 220; i += 1) {
+    const edgePoint = getRandomFramePoint(rect);
+    const normal = getOutwardNormal(edgePoint.edge);
+    const tangentJitter = (Math.random() - 0.5) * 0.9;
+    const angle = Math.atan2(normal.y, normal.x) + tangentJitter;
     const speed = 4 + Math.random() * 13;
     const isSpark = i % 4 === 0;
 
     particles.push({
-      x,
-      y,
+      x: edgePoint.x,
+      y: edgePoint.y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       radius: isSpark ? 2 + Math.random() * 3 : 4 + Math.random() * 8,
@@ -206,6 +217,35 @@ function burstParticles(x, y) {
   if (!particleFrame) {
     animateParticles();
   }
+}
+
+function getRandomFramePoint(rect) {
+  const edge = Math.floor(Math.random() * 4);
+
+  if (edge === 0) {
+    return { edge, x: rect.left + Math.random() * rect.width, y: rect.top };
+  }
+
+  if (edge === 1) {
+    return { edge, x: rect.right, y: rect.top + Math.random() * rect.height };
+  }
+
+  if (edge === 2) {
+    return { edge, x: rect.left + Math.random() * rect.width, y: rect.bottom };
+  }
+
+  return { edge, x: rect.left, y: rect.top + Math.random() * rect.height };
+}
+
+function getOutwardNormal(edge) {
+  const normals = [
+    { x: 0, y: -1 },
+    { x: 1, y: 0 },
+    { x: 0, y: 1 },
+    { x: -1, y: 0 },
+  ];
+
+  return normals[edge];
 }
 
 function animateParticles() {
