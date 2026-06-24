@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 안내 페이지 프로토타입</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="제품 소개 홈">
+      <span class="brand-mark">P</span>
+      <span>Product Guide</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#features">기능</a>
+      <a href="#workflow">사용 흐름</a>
+      <a href="#specs">사양</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="header-action" href="#contact">문의</a>
+    <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero section-band">
+      <div class="hero-copy">
+        <p class="eyebrow">제품 안내 프로토타입</p>
+        <h1>제품의 가치와 사용법을 한눈에 전달하는 안내 페이지</h1>
+        <p class="lead">
+          이미지와 상세 문구를 나중에 교체할 수 있도록 구성한 HTML 기반 제품 설명 페이지입니다.
+          핵심 장점, 사용 흐름, 스펙, 자주 묻는 질문까지 한 화면 안에서 자연스럽게 이어집니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#features">주요 기능 보기</a>
+          <a class="button secondary" href="#workflow">사용 흐름 확인</a>
+        </div>
+      </div>
+      <div class="product-visual" aria-label="제품 이미지 자리">
+        <div class="visual-frame">
+          <div class="visual-topbar"></div>
+          <div class="visual-grid">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p>이미지 교체 영역</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-strip" aria-label="제품 핵심 지표">
+      <div>
+        <strong>3단계</strong>
+        <span>설치 및 시작 흐름</span>
+      </div>
+      <div>
+        <strong>4개</strong>
+        <span>핵심 기능 블록</span>
+      </div>
+      <div>
+        <strong>100%</strong>
+        <span>반응형 정적 페이지</span>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Features</p>
+        <h2>제품을 설명하는 핵심 기능 영역</h2>
+        <p>실제 제품 이미지와 문구가 준비되면 각 항목의 제목, 설명, 포인트만 교체해서 사용할 수 있습니다.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon">01</span>
+          <h3>직관적인 사용성</h3>
+          <p>처음 방문한 사용자도 제품의 목적과 사용 방식을 빠르게 이해할 수 있게 안내합니다.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">02</span>
+          <h3>명확한 장점 전달</h3>
+          <p>제품이 해결하는 문제와 기대 효과를 짧고 선명한 메시지로 정리합니다.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">03</span>
+          <h3>이미지 교체 구조</h3>
+          <p>추후 첨부할 이미지에 맞춰 플레이스홀더 영역을 실제 사진 또는 렌더링으로 교체할 수 있습니다.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">04</span>
+          <h3>모바일 대응</h3>
+          <p>PC와 모바일에서 모두 읽기 편하도록 레이아웃과 메뉴가 자동으로 조정됩니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="section section-muted">
+      <div class="section-heading">
+        <p class="eyebrow">How It Works</p>
+        <h2>사용자가 따라가기 쉬운 3단계 흐름</h2>
+      </div>
+      <div class="timeline">
+        <article>
+          <span>1</span>
+          <h3>제품 확인</h3>
+          <p>첫 화면에서 제품의 이름, 대표 이미지, 핵심 메시지를 확인합니다.</p>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>기능 비교</h3>
+          <p>기능 영역에서 주요 장점과 사용 시나리오를 간단히 비교합니다.</p>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>문의 또는 구매</h3>
+          <p>필요한 정보를 확인한 뒤 하단 CTA를 통해 문의나 구매 단계로 이동합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="specs" class="section specs-layout">
+      <div class="section-heading align-left">
+        <p class="eyebrow">Specs</p>
+        <h2>제품 상세 정보</h2>
+        <p>아래 값은 예시입니다. 실제 크기, 색상, 구성품, 지원 환경에 맞춰 수정하면 됩니다.</p>
+      </div>
+      <div class="spec-table" role="table" aria-label="제품 상세 사양">
+        <div role="row">
+          <strong role="cell">제품명</strong>
+          <span role="cell">제품명 입력 영역</span>
+        </div>
+        <div role="row">
+          <strong role="cell">주요 용도</strong>
+          <span role="cell">제품 사용 목적 설명</span>
+        </div>
+        <div role="row">
+          <strong role="cell">구성품</strong>
+          <span role="cell">본품, 설명서, 추가 액세서리</span>
+        </div>
+        <div role="row">
+          <strong role="cell">지원 환경</strong>
+          <span role="cell">웹, 모바일, 오프라인 안내 자료</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section-muted">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2>자주 묻는 질문</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>이미지는 어디에 넣으면 되나요?</summary>
+          <p>상단의 이미지 교체 영역과 각 섹션 사이에 실제 제품 이미지를 추가할 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>문구는 쉽게 수정할 수 있나요?</summary>
+          <p>HTML 파일의 제목과 설명 텍스트만 바꾸면 전체 안내 페이지의 메시지를 빠르게 조정할 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>모바일에서도 볼 수 있나요?</summary>
+          <p>네. 화면 너비에 따라 메뉴, 기능 카드, 사양 영역이 모바일용 배치로 자동 변경됩니다.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+      <div>
+        <p class="eyebrow">Next Step</p>
+        <h2>실제 이미지와 제품 문구를 넣어 완성도를 높여보세요</h2>
+        <p>이 프로토타입은 구조 확인용입니다. 제품 사진, 정확한 사양, 브랜드 컬러가 준비되면 바로 반영할 수 있습니다.</p>
+      </div>
+      <a class="button primary" href="mailto:hello@example.com">문의하기</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Product Guide Prototype</span>
+    <span>HTML / CSS / JavaScript</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
