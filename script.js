@@ -5,6 +5,7 @@ const galleryItems = [...document.querySelectorAll(".gallery-item")];
 const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
+const modalDescription = document.querySelector(".modal-description");
 const modalPanel = document.querySelector(".modal-panel");
 const closeButtons = document.querySelectorAll("[data-close-modal]");
 const prevButton = document.querySelector(".modal-nav.prev");
@@ -13,23 +14,76 @@ const canvas = document.querySelector(".particle-canvas");
 const ctx = canvas.getContext("2d");
 
 const products = [
-  { title: "Product 01", src: "Product_Image/Product_1.jpg" },
-  { title: "Product 02", src: "Product_Image/Product_2.jpg" },
-  { title: "Product 03", src: "Product_Image/Product_3.jpg" },
-  { title: "Product 04", src: "Product_Image/Product_4.jpg" },
-  { title: "Product 05", src: "Product_Image/Product_5.png" },
-  { title: "Product 06", src: "Product_Image/Product_6.png" },
-  { title: "Product 07", src: "Product_Image/Product_7.png" },
-  { title: "Product 08", src: "Product_Image/Product_8.jpg" },
-  { title: "Product 09", src: "Product_Image/Product_9.png" },
-  { title: "Product 10", src: "Product_Image/Product_10.png" },
-  { title: "Product 11", src: "Product_Image/Product_11.jpg" },
-  { title: "Product 12", src: "Product_Image/Product_12.jpg" },
-  { title: "Product 13", src: "Product_Image/Product_13.jpg" },
+  {
+    title: "Product 01",
+    src: "Product_Image/Product_1.jpg",
+    description: "대표 제품 이미지를 중심으로 전체적인 분위기와 첫인상을 확인할 수 있는 샘플입니다.",
+  },
+  {
+    title: "Product 02",
+    src: "Product_Image/Product_2.jpg",
+    description: "제품의 형태와 사용 장면을 빠르게 살펴볼 수 있도록 구성한 보조 이미지입니다.",
+  },
+  {
+    title: "Product 03",
+    src: "Product_Image/Product_3.jpg",
+    description: "상세 페이지에서 강조하고 싶은 제품의 특징을 보여주는 이미지 영역입니다.",
+  },
+  {
+    title: "Product 04",
+    src: "Product_Image/Product_4.jpg",
+    description: "작은 썸네일에서도 제품 정보를 명확하게 전달할 수 있는 샘플 이미지입니다.",
+  },
+  {
+    title: "Product 05",
+    src: "Product_Image/Product_5.png",
+    description: "고해상도 제품 이미지를 크게 띄워 세부 디테일을 확인하도록 만든 샘플입니다.",
+  },
+  {
+    title: "Product 06",
+    src: "Product_Image/Product_6.png",
+    description: "제품의 색상, 질감, 구성 요소를 한눈에 보여주기 위한 확대 확인용 이미지입니다.",
+  },
+  {
+    title: "Product 07",
+    src: "Product_Image/Product_7.png",
+    description: "사용자가 관심 제품을 클릭했을 때 핵심 정보를 함께 전달하는 예시입니다.",
+  },
+  {
+    title: "Product 08",
+    src: "Product_Image/Product_8.jpg",
+    description: "간결한 설명과 외부 링크를 함께 배치해 다음 행동으로 이어지게 합니다.",
+  },
+  {
+    title: "Product 09",
+    src: "Product_Image/Product_9.png",
+    description: "제품군 안에서 다른 이미지와 비교하며 살펴볼 수 있는 갤러리 샘플입니다.",
+  },
+  {
+    title: "Product 10",
+    src: "Product_Image/Product_10.png",
+    description: "클릭 시 파티클 효과와 함께 제품을 더 강하게 부각하는 인터랙션 예시입니다.",
+  },
+  {
+    title: "Product 11",
+    src: "Product_Image/Product_11.jpg",
+    description: "제품 소개 문구를 짧게 넣어 구매 전 탐색 흐름을 돕는 팝업 설명입니다.",
+  },
+  {
+    title: "Product 12",
+    src: "Product_Image/Product_12.jpg",
+    description: "실제 운영 시에는 가격, 용도, 구성품 같은 핵심 정보를 이 영역에 넣을 수 있습니다.",
+  },
+  {
+    title: "Product 13",
+    src: "Product_Image/Product_13.jpg",
+    description: "마지막 샘플까지 동일한 팝업 구조로 보여주는 반응형 제품 이미지입니다.",
+  },
 ];
 
 let currentIndex = 0;
 let particles = [];
+let shockwaves = [];
 let particleFrame = null;
 
 menuButton.addEventListener("click", () => {
@@ -86,6 +140,7 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
   particles = [];
+  shockwaves = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (particleFrame) {
@@ -101,6 +156,7 @@ function showProduct(index, animate) {
   modalImage.src = product.src;
   modalImage.alt = `${product.title} 확대 이미지`;
   modalTitle.textContent = product.title;
+  modalDescription.textContent = product.description;
 
   if (animate) {
     burstParticles(window.innerWidth / 2, window.innerHeight / 2);
@@ -121,21 +177,29 @@ function resizeCanvas() {
 
 function burstParticles(x, y) {
   resizeCanvas();
-  const colors = ["#176b5b", "#d99735", "#ffffff", "#8ec6b6", "#f2c879"];
+  const colors = ["#176b5b", "#d99735", "#ffffff", "#8ec6b6", "#f2c879", "#ffe9a8"];
 
-  for (let i = 0; i < 74; i += 1) {
+  shockwaves.push(
+    { x, y, radius: 16, speed: 13, life: 34, maxLife: 34, width: 8, color: "#ffffff" },
+    { x, y, radius: 8, speed: 9, life: 44, maxLife: 44, width: 3, color: "#d99735" },
+  );
+
+  for (let i = 0; i < 150; i += 1) {
     const angle = Math.random() * Math.PI * 2;
-    const speed = 3 + Math.random() * 7;
+    const speed = 4 + Math.random() * 13;
+    const isSpark = i % 4 === 0;
 
     particles.push({
       x,
       y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      radius: 3 + Math.random() * 6,
-      life: 58 + Math.random() * 24,
-      maxLife: 82,
+      radius: isSpark ? 2 + Math.random() * 3 : 4 + Math.random() * 8,
+      life: isSpark ? 46 + Math.random() * 18 : 64 + Math.random() * 34,
+      maxLife: 98,
       color: colors[Math.floor(Math.random() * colors.length)],
+      spin: Math.random() * Math.PI,
+      shape: isSpark ? "spark" : "circle",
     });
   }
 
@@ -147,27 +211,52 @@ function burstParticles(x, y) {
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  shockwaves = shockwaves.filter((wave) => {
+    wave.radius += wave.speed;
+    wave.life -= 1;
+
+    const alpha = Math.max(wave.life / wave.maxLife, 0);
+    ctx.globalAlpha = alpha * 0.72;
+    ctx.strokeStyle = wave.color;
+    ctx.lineWidth = wave.width * alpha;
+    ctx.beginPath();
+    ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    return wave.life > 0;
+  });
+
   particles = particles.filter((particle) => {
     particle.x += particle.vx;
     particle.y += particle.vy;
-    particle.vy += 0.08;
-    particle.vx *= 0.985;
-    particle.vy *= 0.985;
+    particle.vy += 0.12;
+    particle.vx *= 0.972;
+    particle.vy *= 0.972;
+    particle.spin += 0.16;
     particle.life -= 1;
 
     const alpha = Math.max(particle.life / particle.maxLife, 0);
     ctx.globalAlpha = alpha;
     ctx.fillStyle = particle.color;
-    ctx.beginPath();
-    ctx.arc(particle.x, particle.y, particle.radius * alpha, 0, Math.PI * 2);
-    ctx.fill();
+
+    if (particle.shape === "spark") {
+      ctx.save();
+      ctx.translate(particle.x, particle.y);
+      ctx.rotate(particle.spin);
+      ctx.fillRect(-particle.radius * 2, -particle.radius / 2, particle.radius * 4, particle.radius);
+      ctx.restore();
+    } else {
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.radius * alpha, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     return particle.life > 0;
   });
 
   ctx.globalAlpha = 1;
 
-  if (particles.length) {
+  if (particles.length || shockwaves.length) {
     particleFrame = requestAnimationFrame(animateParticles);
   } else {
     particleFrame = null;
