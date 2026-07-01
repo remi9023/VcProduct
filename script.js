@@ -147,7 +147,14 @@ if (!isIntroVideoHiddenToday()) {
 }
 
 function openIntroVideo() {
-  introVideoFrame.src = introVideoFrame.dataset.src;
+  if (isLocalFilePreview()) {
+    introVideoFrame.src = "";
+    introVideoModal.classList.add("is-fallback");
+  } else {
+    introVideoFrame.src = getIntroVideoEmbedUrl();
+    introVideoModal.classList.remove("is-fallback");
+  }
+
   introVideoModal.classList.add("is-open");
   introVideoModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
@@ -155,9 +162,24 @@ function openIntroVideo() {
 
 function closeIntroVideo() {
   introVideoModal.classList.remove("is-open");
+  introVideoModal.classList.remove("is-fallback");
   introVideoModal.setAttribute("aria-hidden", "true");
   introVideoFrame.src = "";
   document.body.classList.remove("modal-open");
+}
+
+function getIntroVideoEmbedUrl() {
+  const url = new URL(introVideoFrame.dataset.src);
+
+  if (window.location.origin && window.location.origin !== "null") {
+    url.searchParams.set("origin", window.location.origin);
+  }
+
+  return url.toString();
+}
+
+function isLocalFilePreview() {
+  return window.location.protocol === "file:";
 }
 
 function saveIntroVideoHiddenToday() {
