@@ -55,18 +55,21 @@ a {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   font-weight: 800;
+  color: #4f5653;
+  white-space: nowrap;
 }
 
-.brand-mark {
-  display: inline-grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  color: #fff;
-  background: var(--accent);
-  border-radius: 8px;
+.brand span {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.brand-logo {
+  display: block;
+  width: clamp(132px, 18vw, 220px);
+  height: auto;
 }
 
 .nav {
@@ -794,6 +797,18 @@ details p {
 }
 
 @media (max-width: 680px) {
+  .brand {
+    gap: 8px;
+  }
+
+  .brand span {
+    font-size: 13px;
+  }
+
+  .brand-logo {
+    width: clamp(86px, 29vw, 112px);
+  }
+
   .section-band,
   .section,
   .cta-section,
