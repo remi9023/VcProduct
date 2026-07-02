@@ -2,10 +2,7 @@ const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".menu-button");
 const navLinks = document.querySelectorAll(".nav a");
 const galleryItems = [...document.querySelectorAll(".gallery-item")];
-const introVideoModal = document.querySelector(".intro-video-modal");
-const introYoutubePlayer = document.querySelector(".intro-youtube-player");
-const introVideoCloseButtons = document.querySelectorAll("[data-close-intro-video]");
-const introVideoHideTodayButton = document.querySelector("[data-hide-intro-video-today]");
+const youtubeEmbeds = document.querySelectorAll(".youtube-embed");
 const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
@@ -89,7 +86,6 @@ let currentIndex = 0;
 let particles = [];
 let shockwaves = [];
 let particleFrame = null;
-const introVideoStorageKey = "sgwonIntroVideoHiddenDate";
 
 menuButton.addEventListener("click", () => {
   const isOpen = header.classList.toggle("menu-open");
@@ -115,24 +111,10 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", closeModal);
 });
 
-introVideoCloseButtons.forEach((button) => {
-  button.addEventListener("click", closeIntroVideo);
-});
-
-introVideoHideTodayButton.addEventListener("click", () => {
-  saveIntroVideoHiddenToday();
-  closeIntroVideo();
-});
-
 prevButton.addEventListener("click", () => showProduct(currentIndex - 1, true));
 nextButton.addEventListener("click", () => showProduct(currentIndex + 1, true));
 
 window.addEventListener("keydown", (event) => {
-  if (introVideoModal.classList.contains("is-open") && event.key === "Escape") {
-    closeIntroVideo();
-    return;
-  }
-
   if (!modal.classList.contains("is-open")) return;
 
   if (event.key === "Escape") closeModal();
@@ -142,61 +124,27 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("resize", resizeCanvas);
 
-if (!isIntroVideoHiddenToday()) {
-  window.setTimeout(openIntroVideo, 300);
-}
+initializeYoutubeEmbeds();
 
-function openIntroVideo() {
-  introVideoModal.classList.toggle("is-local-file", window.location.protocol === "file:");
-  introYoutubePlayer.src = getIntroYoutubeEmbedUrl();
-  introVideoModal.classList.add("is-open");
-  introVideoModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-}
+function initializeYoutubeEmbeds() {
+  youtubeEmbeds.forEach((embed) => {
+    const player = embed.querySelector(".youtube-embed-player");
 
-function closeIntroVideo() {
-  introVideoModal.classList.remove("is-open");
-  introVideoModal.classList.remove("is-local-file");
-  introVideoModal.setAttribute("aria-hidden", "true");
-  introYoutubePlayer.src = "";
-  document.body.classList.remove("modal-open");
-}
+    if (!player) return;
 
-function getIntroYoutubeEmbedUrl() {
-  const url = new URL(introYoutubePlayer.dataset.src);
+    if (window.location.protocol === "file:") {
+      embed.classList.add("is-local-file");
+      return;
+    }
 
-  if (window.location.origin && window.location.origin !== "null") {
-    url.searchParams.set("origin", window.location.origin);
-  }
+    const url = new URL(player.dataset.youtubeSrc);
 
-  return url.toString();
-}
+    if (window.location.origin && window.location.origin !== "null") {
+      url.searchParams.set("origin", window.location.origin);
+    }
 
-function saveIntroVideoHiddenToday() {
-  try {
-    localStorage.setItem(introVideoStorageKey, getTodayKey());
-  } catch (error) {
-    return false;
-  }
-
-  return true;
-}
-
-function isIntroVideoHiddenToday() {
-  try {
-    return localStorage.getItem(introVideoStorageKey) === getTodayKey();
-  } catch (error) {
-    return false;
-  }
-}
-
-function getTodayKey() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
+    player.src = url.toString();
+  });
 }
 
 function openModal(index) {

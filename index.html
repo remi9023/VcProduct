@@ -14,6 +14,7 @@
       <span>장애가족행복지킴이 승가원</span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
+      <a href="#sgwon-video">승가원 영상</a>
       <a href="#gallery">제품 이미지</a>
       <a href="#features">기능</a>
       <a href="#workflow">사용 흐름</a>
@@ -49,6 +50,28 @@
             <strong>제품 대표 이미지</strong>
             <span>클릭형 갤러리와 팝업 효과가 연결되어 있습니다.</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sgwon-video" class="section video-section">
+      <div class="section-heading">
+        <p class="eyebrow">Sungawon Story</p>
+        <h2>승가원 30년, 장애인의 꿈을 이루는 미래로</h2>
+      </div>
+      <div class="youtube-embed">
+        <iframe
+          class="youtube-embed-player"
+          title="승가원 30주년 유튜브 영상"
+          data-youtube-src="https://www.youtube.com/embed/Rpj6sO-6qnY?rel=0&modestbranding=1&playsinline=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+        <div class="youtube-embed-notice">
+          <strong>유튜브 영상은 웹 주소에서 재생됩니다.</strong>
+          <span>현재처럼 파일을 직접 열면 YouTube가 출처를 확인하지 못해 153 오류가 발생할 수 있습니다.</span>
+          <a href="https://www.youtube.com/watch?v=Rpj6sO-6qnY" target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기</a>
         </div>
       </div>
     </section>
@@ -240,31 +263,6 @@
       <a class="button primary" href="mailto:hello@example.com">문의하기</a>
     </section>
   </main>
-
-  <div class="intro-video-modal" aria-hidden="true">
-    <div class="intro-video-backdrop" data-close-intro-video></div>
-    <section class="intro-video-panel" role="dialog" aria-modal="true" aria-label="승가원 30주년 소개 영상">
-      <div class="intro-video-actions">
-        <button class="intro-video-skip" type="button" data-hide-intro-video-today>오늘 하루 다시 보지 않기</button>
-        <button class="intro-video-close" type="button" data-close-intro-video>닫기</button>
-      </div>
-      <div class="intro-video-frame">
-        <iframe
-          class="intro-youtube-player"
-          title="승가원 30주년 유튜브 영상"
-          data-src="https://www.youtube.com/embed/Rpj6sO-6qnY?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-        <div class="intro-video-notice">
-          <strong>유튜브 영상은 HTTP 주소에서 재생됩니다.</strong>
-          <span>현재 파일을 직접 열어 153 오류가 발생할 수 있습니다. Live Server 또는 배포 주소에서 확인해 주세요.</span>
-          <a href="https://www.youtube.com/watch?v=Rpj6sO-6qnY" target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기</a>
-        </div>
-      </div>
-    </section>
-  </div>
 
   <div class="product-modal" aria-hidden="true">
     <canvas class="particle-canvas" aria-hidden="true"></canvas>
