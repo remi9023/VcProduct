@@ -12,9 +12,10 @@ $MimeTypes = @{
   ".ico" = "image/x-icon"
 }
 
-$Listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $Port)
+$HostName = "127.0.0.1"
+$Listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Parse($HostName), $Port)
 $Listener.Start()
-Write-Host "Preview server running at http://localhost:$Port/"
+Write-Host "Preview server running at http://$HostName`:$Port/"
 
 while ($true) {
   $Client = $Listener.AcceptTcpClient()

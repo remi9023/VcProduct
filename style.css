@@ -162,6 +162,11 @@ h2 {
   line-height: 1.15;
 }
 
+.single-line-title {
+  white-space: nowrap;
+  font-size: clamp(26px, 3.4vw, 42px);
+}
+
 h3 {
   margin: 0;
   font-size: 20px;
@@ -821,6 +826,10 @@ details p {
 }
 
 @media (max-width: 680px) {
+  .single-line-title {
+    font-size: 24px;
+  }
+
   .brand {
     gap: 8px;
   }
