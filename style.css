@@ -648,16 +648,15 @@ details p {
   border-radius: 8px;
 }
 
-.intro-video-player {
+.intro-youtube-player {
   display: block;
   width: 100%;
   height: 100%;
   background: #101614;
   border: 0;
-  object-fit: contain;
 }
 
-.intro-video-empty {
+.intro-video-notice {
   position: absolute;
   inset: 0;
   display: none;
@@ -669,25 +668,26 @@ details p {
   background: #101614;
 }
 
-.intro-video-modal.is-video-missing .intro-video-player {
+.intro-video-modal.is-local-file .intro-youtube-player {
   display: none;
 }
 
-.intro-video-modal.is-video-missing .intro-video-empty {
+.intro-video-modal.is-local-file .intro-video-notice {
   display: grid;
 }
 
-.intro-video-empty strong {
+.intro-video-notice strong {
   font-size: clamp(20px, 3vw, 32px);
   line-height: 1.3;
 }
 
-.intro-video-empty span {
+.intro-video-notice span {
+  max-width: 560px;
   color: #c9d7d2;
   font-size: 14px;
 }
 
-.intro-video-empty a {
+.intro-video-notice a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -700,8 +700,8 @@ details p {
   transition: background 160ms ease, transform 160ms ease;
 }
 
-.intro-video-empty a:hover,
-.intro-video-empty a:focus-visible {
+.intro-video-notice a:hover,
+.intro-video-notice a:focus-visible {
   background: var(--accent-dark);
   transform: translateY(-2px);
   outline: 0;

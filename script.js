@@ -3,7 +3,7 @@ const menuButton = document.querySelector(".menu-button");
 const navLinks = document.querySelectorAll(".nav a");
 const galleryItems = [...document.querySelectorAll(".gallery-item")];
 const introVideoModal = document.querySelector(".intro-video-modal");
-const introVideoPlayer = document.querySelector(".intro-video-player");
+const introYoutubePlayer = document.querySelector(".intro-youtube-player");
 const introVideoCloseButtons = document.querySelectorAll("[data-close-intro-video]");
 const introVideoHideTodayButton = document.querySelector("[data-hide-intro-video-today]");
 const modal = document.querySelector(".product-modal");
@@ -124,14 +124,6 @@ introVideoHideTodayButton.addEventListener("click", () => {
   closeIntroVideo();
 });
 
-introVideoPlayer.addEventListener("error", () => {
-  introVideoModal.classList.add("is-video-missing");
-});
-
-introVideoPlayer.addEventListener("loadeddata", () => {
-  introVideoModal.classList.remove("is-video-missing");
-});
-
 prevButton.addEventListener("click", () => showProduct(currentIndex - 1, true));
 nextButton.addEventListener("click", () => showProduct(currentIndex + 1, true));
 
@@ -155,34 +147,29 @@ if (!isIntroVideoHiddenToday()) {
 }
 
 function openIntroVideo() {
+  introVideoModal.classList.toggle("is-local-file", window.location.protocol === "file:");
+  introYoutubePlayer.src = getIntroYoutubeEmbedUrl();
   introVideoModal.classList.add("is-open");
   introVideoModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
-
-  if (!introVideoModal.classList.contains("is-video-missing")) {
-    resetIntroVideoPlayer();
-    introVideoPlayer.play().catch(() => {
-      introVideoPlayer.controls = true;
-    });
-  }
 }
 
 function closeIntroVideo() {
   introVideoModal.classList.remove("is-open");
+  introVideoModal.classList.remove("is-local-file");
   introVideoModal.setAttribute("aria-hidden", "true");
-  introVideoPlayer.pause();
-  resetIntroVideoPlayer();
+  introYoutubePlayer.src = "";
   document.body.classList.remove("modal-open");
 }
 
-function resetIntroVideoPlayer() {
-  try {
-    introVideoPlayer.currentTime = 0;
-  } catch (error) {
-    return false;
+function getIntroYoutubeEmbedUrl() {
+  const url = new URL(introYoutubePlayer.dataset.src);
+
+  if (window.location.origin && window.location.origin !== "null") {
+    url.searchParams.set("origin", window.location.origin);
   }
 
-  return true;
+  return url.toString();
 }
 
 function saveIntroVideoHiddenToday() {
