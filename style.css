@@ -1,15 +1,15 @@
 :root {
-  --bg: #f7f8f5;
+  --bg: #fbfdf8;
   --surface: #ffffff;
-  --surface-soft: #eef3ed;
+  --surface-soft: #f1faeb;
   --text: #1c2522;
   --muted: #5c6863;
-  --line: #d9e1dc;
-  --accent: #176b5b;
-  --accent-dark: #0e493f;
-  --accent-soft: #d8ebe5;
-  --gold: #d99735;
-  --shadow: 0 18px 42px rgba(29, 44, 38, 0.12);
+  --line: #d7e9cb;
+  --accent: #7dc242;
+  --accent-dark: #3f7f20;
+  --accent-soft: #e6f6dc;
+  --gold: #a8d65a;
+  --shadow: 0 18px 42px rgba(70, 126, 35, 0.14);
 }
 
 * {
@@ -200,7 +200,7 @@ h3 {
 .button.primary {
   color: #fff;
   background: var(--accent);
-  box-shadow: 0 10px 24px rgba(23, 107, 91, 0.22);
+  box-shadow: 0 10px 24px rgba(125, 194, 66, 0.28);
 }
 
 .button.secondary {
@@ -272,7 +272,7 @@ h3 {
 .visual-grid span {
   min-height: 120px;
   background: var(--surface-soft);
-  border: 1px dashed #aac0b7;
+  border: 1px dashed #a8d88a;
   border-radius: 8px;
 }
 
@@ -356,7 +356,7 @@ h3 {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 10px 26px rgba(29, 44, 38, 0.08);
+  box-shadow: 0 10px 26px rgba(70, 126, 35, 0.1);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
@@ -370,7 +370,7 @@ h3 {
 .gallery-item:focus-visible {
   transform: translateY(-5px);
   border-color: var(--accent);
-  box-shadow: 0 18px 38px rgba(29, 44, 38, 0.16);
+  box-shadow: 0 18px 38px rgba(70, 126, 35, 0.18);
   outline: 0;
 }
 
@@ -396,7 +396,7 @@ h3 {
   min-height: 34px;
   padding: 7px 12px;
   color: #fff;
-  background: rgba(14, 73, 63, 0.86);
+  background: rgba(63, 127, 32, 0.9);
   border-radius: 8px;
   font-size: 13px;
   font-weight: 800;
@@ -497,7 +497,7 @@ h3 {
 }
 
 .spec-table strong {
-  background: #f3f6f1;
+  background: var(--surface-soft);
 }
 
 .spec-table span {
@@ -544,7 +544,7 @@ details p {
 
 .cta-section .eyebrow,
 .cta-section p {
-  color: #d6ebe5;
+  color: #e8f7df;
 }
 
 .cta-section h2 {
@@ -751,7 +751,7 @@ details p {
   background: var(--accent);
   border-radius: 8px;
   font-weight: 800;
-  box-shadow: 0 10px 24px rgba(23, 107, 91, 0.22);
+  box-shadow: 0 10px 24px rgba(125, 194, 66, 0.28);
   transition: transform 160ms ease, background 160ms ease;
 }
 
