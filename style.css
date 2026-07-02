@@ -648,11 +648,63 @@ details p {
   border-radius: 8px;
 }
 
-.intro-video-frame iframe {
+.intro-video-player {
   display: block;
   width: 100%;
   height: 100%;
+  background: #101614;
   border: 0;
+  object-fit: contain;
+}
+
+.intro-video-empty {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  gap: 12px;
+  padding: 28px;
+  color: #fff;
+  text-align: center;
+  background: #101614;
+}
+
+.intro-video-modal.is-video-missing .intro-video-player {
+  display: none;
+}
+
+.intro-video-modal.is-video-missing .intro-video-empty {
+  display: grid;
+}
+
+.intro-video-empty strong {
+  font-size: clamp(20px, 3vw, 32px);
+  line-height: 1.3;
+}
+
+.intro-video-empty span {
+  color: #c9d7d2;
+  font-size: 14px;
+}
+
+.intro-video-empty a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  font-weight: 800;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.intro-video-empty a:hover,
+.intro-video-empty a:focus-visible {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  outline: 0;
 }
 
 .product-modal {
