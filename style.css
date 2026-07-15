@@ -32,6 +32,48 @@ body.modal-open {
   overflow: hidden;
 }
 
+.click-effect {
+  position: fixed;
+  z-index: 160;
+  left: 0;
+  top: 0;
+  width: var(--effect-size);
+  height: var(--effect-size);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.82) rotate(var(--effect-rotate));
+  animation: clickEffectPop 720ms cubic-bezier(0.16, 0.9, 0.22, 1) forwards;
+}
+
+.click-effect img {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(63, 127, 32, 0.24));
+}
+
+.click-effect-particle {
+  position: absolute;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.72);
+  transform: translate(-50%, -50%);
+  animation: clickEffectParticle 680ms ease-out forwards;
+}
+
+.click-effect-particle:nth-child(3n) {
+  background: #f2c879;
+}
+
+.click-effect-particle:nth-child(3n + 1) {
+  background: #2098d1;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -823,6 +865,44 @@ details p {
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes clickEffectPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6) rotate(var(--effect-rotate));
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -58%) scale(1.08) rotate(var(--effect-rotate));
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -70%) scale(1) rotate(var(--effect-rotate));
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -86%) scale(0.9) rotate(var(--effect-rotate));
+  }
+}
+
+@keyframes clickEffectParticle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x)), calc(-50% + var(--drift-y))) scale(0.1);
   }
 }
 

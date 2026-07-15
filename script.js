@@ -15,6 +15,14 @@ const prevButton = document.querySelector(".modal-nav.prev");
 const nextButton = document.querySelector(".modal-nav.next");
 const canvas = document.querySelector(".particle-canvas");
 const ctx = canvas.getContext("2d");
+const clickEffectImages = [
+  "Page_Resource/Click_Effect_Image/Click_Img_1.png",
+  "Page_Resource/Click_Effect_Image/Click_Img_2.png",
+  "Page_Resource/Click_Effect_Image/Click_Img_3.png",
+  "Page_Resource/Click_Effect_Image/Click_Img_4.png",
+  "Page_Resource/Click_Effect_Image/Click_Img_5.png",
+  "Page_Resource/Click_Effect_Image/Click_Img_6.png",
+];
 
 const products = [
   {
@@ -164,6 +172,58 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", resizeCanvas);
+document.addEventListener("click", showClickEffect);
+
+function showClickEffect(event) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const effect = document.createElement("span");
+  const image = document.createElement("img");
+  const size = 42 + Math.random() * 8;
+  const imageSrc = clickEffectImages[Math.floor(Math.random() * clickEffectImages.length)];
+
+  effect.className = "click-effect";
+  effect.style.left = `${event.clientX}px`;
+  effect.style.top = `${event.clientY}px`;
+  effect.style.setProperty("--effect-size", `${size}px`);
+  effect.style.setProperty("--effect-rotate", `${Math.random() * 24 - 12}deg`);
+
+  image.src = imageSrc;
+  image.alt = "";
+  image.setAttribute("aria-hidden", "true");
+  effect.append(image);
+
+  for (let i = 0; i < 12; i += 1) {
+    const particle = document.createElement("span");
+    const edge = i % 4;
+    const offset = 10 + Math.random() * 28;
+    const driftX = (Math.random() - 0.5) * 44;
+    const driftY = (Math.random() - 0.5) * 44;
+
+    particle.className = "click-effect-particle";
+    particle.style.setProperty("--drift-x", `${driftX}px`);
+    particle.style.setProperty("--drift-y", `${driftY}px`);
+
+    if (edge === 0) {
+      particle.style.left = `${offset}%`;
+      particle.style.top = "0";
+    } else if (edge === 1) {
+      particle.style.left = "100%";
+      particle.style.top = `${offset}%`;
+    } else if (edge === 2) {
+      particle.style.left = `${offset}%`;
+      particle.style.top = "100%";
+    } else {
+      particle.style.left = "0";
+      particle.style.top = `${offset}%`;
+    }
+
+    effect.append(particle);
+  }
+
+  document.body.append(effect);
+  effect.addEventListener("animationend", () => effect.remove(), { once: true });
+}
 
 function openModal(index) {
   showProduct(index, false);
