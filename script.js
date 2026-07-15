@@ -2,7 +2,6 @@ const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".menu-button");
 const navLinks = document.querySelectorAll(".nav a");
 const galleryItems = [...document.querySelectorAll(".gallery-item")];
-const youtubePlayers = document.querySelectorAll(".youtube-embed-player");
 const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
@@ -123,21 +122,6 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", resizeCanvas);
-
-initializeYoutubePlayers();
-
-function initializeYoutubePlayers() {
-  youtubePlayers.forEach((player) => {
-    const url = new URL(player.dataset.youtubeSrc);
-
-    if (window.location.origin && window.location.origin !== "null") {
-      url.searchParams.set("origin", window.location.origin);
-      url.searchParams.set("widget_referrer", window.location.href);
-    }
-
-    player.src = url.toString();
-  });
-}
 
 function openModal(index) {
   showProduct(index, false);
