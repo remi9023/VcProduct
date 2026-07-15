@@ -637,6 +637,8 @@ details p {
   gap: 18px;
   width: min(1040px, 100%);
   max-height: min(86vh, 820px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   transform: translateY(14px) scale(0.92);
   opacity: 0;
 }
@@ -664,7 +666,7 @@ details p {
 .modal-image {
   display: block;
   width: 100%;
-  max-height: calc(86vh - 150px);
+  max-height: calc(86vh - 250px);
   object-fit: contain;
   background: #f4f6f1;
   border-radius: 8px;
@@ -695,6 +697,56 @@ details p {
 .modal-description {
   grid-column: 1 / -1;
   margin: 2px 0 0;
+}
+
+.modal-product-detail {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+  padding: 28px 0 4px;
+  border-top: 1px solid var(--line);
+}
+
+.modal-product-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.18;
+  font-weight: 900;
+}
+
+.modal-product-copy {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.modal-product-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 10px 0 0;
+  padding: 18px 20px;
+  background: color-mix(in srgb, var(--accent) 10%, #fff);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, #fff);
+  border-radius: 8px;
+}
+
+.modal-product-price dt {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.modal-product-price dd {
+  margin: 0;
+  color: var(--accent-dark);
+  font-size: 22px;
+  font-weight: 900;
 }
 
 .modal-link {
@@ -954,6 +1006,24 @@ details p {
 
   .modal-kicker {
     justify-self: start;
+  }
+
+  .modal-product-detail {
+    margin-top: 20px;
+    padding-top: 22px;
+  }
+
+  .modal-product-title {
+    font-size: 28px;
+  }
+
+  .modal-product-copy {
+    font-size: 16px;
+  }
+
+  .modal-product-price {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .modal-link {

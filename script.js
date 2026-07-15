@@ -6,6 +6,9 @@ const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
 const modalDescription = document.querySelector(".modal-description");
+const modalProductTitle = document.querySelector(".modal-product-title");
+const modalProductCopy = document.querySelector(".modal-product-copy");
+const modalProductPrice = document.querySelector(".modal-product-price dd");
 const modalPanel = document.querySelector(".modal-panel");
 const closeButtons = document.querySelectorAll("[data-close-modal]");
 const prevButton = document.querySelector(".modal-nav.prev");
@@ -18,66 +21,105 @@ const products = [
     title: "Product 01",
     src: "Product_Image/Product_1.jpg",
     description: "대표 제품 이미지를 중심으로 전체적인 분위기와 첫인상을 확인할 수 있는 샘플입니다.",
+    detailTitle: "원한다 칼퇴 기원한다 칼퇴",
+    detailCopy: "칼퇴기원 마우스 패드입니다. 업무 책상 위에 두고 매일의 빠른 퇴근을 유쾌하게 응원할 수 있는 굿즈입니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 02",
     src: "Product_Image/Product_2.jpg",
     description: "제품의 형태와 사용 장면을 빠르게 살펴볼 수 있도록 구성한 보조 이미지입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 03",
     src: "Product_Image/Product_3.jpg",
     description: "상세 페이지에서 강조하고 싶은 제품의 특징을 보여주는 이미지 영역입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 04",
     src: "Product_Image/Product_4.jpg",
     description: "작은 썸네일에서도 제품 정보를 명확하게 전달할 수 있는 샘플 이미지입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 05",
     src: "Product_Image/Product_5.png",
     description: "고해상도 제품 이미지를 크게 띄워 세부 디테일을 확인하도록 만든 샘플입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 06",
     src: "Product_Image/Product_6.png",
     description: "제품의 색상, 질감, 구성 요소를 한눈에 보여주기 위한 확대 확인용 이미지입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 07",
     src: "Product_Image/Product_7.png",
     description: "사용자가 관심 제품을 클릭했을 때 핵심 정보를 함께 전달하는 예시입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 08",
     src: "Product_Image/Product_8.jpg",
     description: "간결한 설명과 외부 링크를 함께 배치해 다음 행동으로 이어지게 합니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 09",
     src: "Product_Image/Product_9.png",
     description: "제품군 안에서 다른 이미지와 비교하며 살펴볼 수 있는 갤러리 샘플입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 10",
     src: "Product_Image/Product_10.png",
     description: "클릭 시 파티클 효과와 함께 제품을 더 강하게 부각하는 인터랙션 예시입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 11",
     src: "Product_Image/Product_11.jpg",
     description: "제품 소개 문구를 짧게 넣어 구매 전 탐색 흐름을 돕는 팝업 설명입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 12",
     src: "Product_Image/Product_12.jpg",
     description: "실제 운영 시에는 가격, 용도, 구성품 같은 핵심 정보를 이 영역에 넣을 수 있습니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
   {
     title: "Product 13",
     src: "Product_Image/Product_13.jpg",
     description: "마지막 샘플까지 동일한 팝업 구조로 보여주는 반응형 제품 이미지입니다.",
+    detailTitle: "피우리와 이루리가 함께한 굿즈",
+    detailCopy: "상품별 상세 설명이 업로드되면 이 영역에 소개 문구가 표시됩니다.",
+    price: "추후 공개",
   },
 ];
 
@@ -156,6 +198,10 @@ function showProduct(index, animate) {
   modalImage.alt = `${product.title} 확대 이미지`;
   modalTitle.textContent = product.title;
   modalDescription.textContent = product.description;
+  modalProductTitle.textContent = product.detailTitle;
+  modalProductCopy.textContent = product.detailCopy;
+  modalProductPrice.textContent = product.price;
+  modalPanel.scrollTop = 0;
 
   if (animate) {
     restartPopAnimation();
