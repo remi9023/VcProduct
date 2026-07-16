@@ -158,6 +158,8 @@ let currentIndex = 0;
 let particles = [];
 let shockwaves = [];
 let particleFrame = null;
+let lastScrollY = window.scrollY;
+let scrollDirection = "down";
 
 menuButton.addEventListener("click", () => {
   const isOpen = header.classList.toggle("menu-open");
@@ -195,6 +197,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", resizeCanvas);
+window.addEventListener("scroll", updateScrollDirection, { passive: true });
 document.addEventListener("click", showClickEffect);
 initializeScrollReveal();
 
@@ -206,16 +209,30 @@ function initializeScrollReveal() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
+      entry.target.classList.toggle("scroll-down", scrollDirection === "down");
+      entry.target.classList.toggle("scroll-up", scrollDirection === "up");
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      } else {
+        entry.target.classList.remove("is-visible");
+      }
     });
   }, {
-    threshold: 0.22,
-    rootMargin: "0px 0px -10% 0px",
+    threshold: 0.18,
+    rootMargin: "-8% 0px -12% 0px",
   });
 
-  revealElements.forEach((element) => observer.observe(element));
+  revealElements.forEach((element) => {
+    element.classList.add("scroll-down");
+    observer.observe(element);
+  });
+}
+
+function updateScrollDirection() {
+  const currentScrollY = window.scrollY;
+  scrollDirection = currentScrollY >= lastScrollY ? "down" : "up";
+  lastScrollY = currentScrollY;
 }
 
 function showClickEffect(event) {

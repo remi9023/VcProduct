@@ -443,13 +443,45 @@ h3 {
 
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(42px);
-  transition: opacity 720ms ease, transform 720ms ease;
+  transform: translate3d(0, var(--reveal-y, 42px), 0) rotate(var(--reveal-rotate, 0deg)) scale(0.985);
+  transition: opacity 760ms ease, transform 760ms cubic-bezier(0.2, 0.82, 0.18, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.scroll-down {
+  --reveal-y: 54px;
+  --reveal-rotate: -0.8deg;
+}
+
+.reveal-on-scroll.scroll-up {
+  --reveal-y: -54px;
+  --reveal-rotate: 0.8deg;
+}
+
+.reveal-item:nth-child(2) {
+  --reveal-delay: 90ms;
+}
+
+.reveal-item:nth-child(3) {
+  --reveal-delay: 160ms;
+}
+
+.reveal-item:nth-child(4) {
+  --reveal-delay: 230ms;
+}
+
+.reveal-item:nth-child(5) {
+  --reveal-delay: 300ms;
+}
+
+.reveal-item:nth-child(6) {
+  --reveal-delay: 370ms;
 }
 
 .reveal-on-scroll.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
 }
 
 .section {
@@ -971,11 +1003,11 @@ details p {
 }
 
 .modal-nav.prev {
-  left: max(24px, calc(50vw - 580px));
+  left: max(24px, calc(50vw - 600px));
 }
 
 .modal-nav.next {
-  right: max(24px, calc(50vw - 580px));
+  right: max(24px, calc(50vw - 600px));
 }
 
 @keyframes productPop {
@@ -1044,6 +1076,15 @@ details p {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (max-width: 980px) {
   .site-header {
     grid-template-columns: auto auto;
@@ -1104,6 +1145,32 @@ details p {
     margin-top: 0;
   }
 
+}
+
+@media (max-width: 1220px) {
+  .modal-nav {
+    top: auto;
+    bottom: 28px;
+    width: 56px;
+    height: 50px;
+    font-size: 34px;
+    transform: none;
+  }
+
+  .modal-nav.prev {
+    left: calc(50vw - 74px);
+    right: auto;
+  }
+
+  .modal-nav.next {
+    right: calc(50vw - 74px);
+    left: auto;
+  }
+
+  .modal-nav:hover,
+  .modal-nav:focus-visible {
+    transform: none;
+  }
 }
 
 @media (max-width: 680px) {
