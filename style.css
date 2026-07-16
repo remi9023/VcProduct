@@ -754,17 +754,29 @@ details p {
 .modal-product-title {
   margin: 0;
   color: var(--ink);
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: 1.18;
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1.22;
   font-weight: 900;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .modal-product-copy {
   max-width: 760px;
   margin: 0;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: 17px;
+  line-height: 1.85;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.modal-product-copy p {
+  margin: 0;
+}
+
+.modal-product-copy p + p {
+  margin-top: 14px;
 }
 
 .modal-product-price {
