@@ -209,18 +209,22 @@ function initializeScrollReveal() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.toggle("scroll-down", scrollDirection === "down");
-      entry.target.classList.toggle("scroll-up", scrollDirection === "up");
+      const target = entry.target;
 
       if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      } else {
-        entry.target.classList.remove("is-visible");
+        target.classList.toggle("scroll-down", scrollDirection === "down");
+        target.classList.toggle("scroll-up", scrollDirection === "up");
+        target.classList.add("is-visible");
+        return;
+      }
+
+      if (isRevealElementWellOutsideViewport(target)) {
+        target.classList.remove("is-visible");
       }
     });
   }, {
-    threshold: 0.18,
-    rootMargin: "-8% 0px -12% 0px",
+    threshold: 0,
+    rootMargin: "-18% 0px -18% 0px",
   });
 
   revealElements.forEach((element) => {
@@ -231,8 +235,17 @@ function initializeScrollReveal() {
 
 function updateScrollDirection() {
   const currentScrollY = window.scrollY;
+  if (Math.abs(currentScrollY - lastScrollY) < 4) return;
+
   scrollDirection = currentScrollY >= lastScrollY ? "down" : "up";
   lastScrollY = currentScrollY;
+}
+
+function isRevealElementWellOutsideViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const buffer = Math.max(160, window.innerHeight * 0.18);
+
+  return rect.bottom < -buffer || rect.top > window.innerHeight + buffer;
 }
 
 function showClickEffect(event) {
