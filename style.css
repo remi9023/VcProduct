@@ -456,13 +456,13 @@ h3 {
 }
 
 .reveal-on-scroll.scroll-down {
-  /* Scrolling down: start below the final spot, then float upward into place. */
+  /* Text floats upward into place. */
   --reveal-y: 54px;
   --reveal-rotate: -0.8deg;
 }
 
 .reveal-on-scroll.scroll-up {
-  /* Scrolling up: start above the final spot, then float downward into place. */
+  /* Text floats downward into place. */
   --reveal-y: -54px;
   --reveal-rotate: 0.8deg;
 }

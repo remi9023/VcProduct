@@ -273,8 +273,10 @@ function updateRevealElements(replayVisible = false) {
 
 function setRevealDirection(element) {
   element.dataset.revealDirection = scrollDirection;
-  element.classList.toggle("scroll-down", scrollDirection === "down");
-  element.classList.toggle("scroll-up", scrollDirection === "up");
+  const shouldFloatDown = scrollDirection === "down";
+
+  element.classList.toggle("scroll-down", !shouldFloatDown);
+  element.classList.toggle("scroll-up", shouldFloatDown);
 }
 
 function playRevealAnimation(element) {
