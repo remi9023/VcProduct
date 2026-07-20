@@ -829,13 +829,20 @@ details p {
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.34);
 }
 
+.modal-image-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #f4f6f1;
+  border-radius: 8px;
+}
+
 .modal-image {
   display: block;
   width: 100%;
   max-height: calc(86vh - 250px);
   object-fit: contain;
-  background: #f4f6f1;
-  border-radius: 8px;
 }
 
 .modal-figure figcaption {
@@ -990,7 +997,7 @@ details p {
 }
 
 .modal-nav {
-  position: fixed;
+  position: absolute;
   top: 50%;
   width: 48px;
   height: 72px;
@@ -1003,11 +1010,11 @@ details p {
 }
 
 .modal-nav.prev {
-  left: max(24px, calc(50vw - 600px));
+  left: 16px;
 }
 
 .modal-nav.next {
-  right: max(24px, calc(50vw - 600px));
+  right: 16px;
 }
 
 @keyframes productPop {
@@ -1149,27 +1156,27 @@ details p {
 
 @media (max-width: 1220px) {
   .modal-nav {
-    top: auto;
-    bottom: 28px;
+    top: 50%;
+    bottom: auto;
     width: 56px;
     height: 50px;
     font-size: 34px;
-    transform: none;
+    transform: translateY(-50%);
   }
 
   .modal-nav.prev {
-    left: calc(50vw - 74px);
+    left: 14px;
     right: auto;
   }
 
   .modal-nav.next {
-    right: calc(50vw - 74px);
+    right: 14px;
     left: auto;
   }
 
   .modal-nav:hover,
   .modal-nav:focus-visible {
-    transform: none;
+    transform: translateY(-50%) scale(1.04);
   }
 }
 
@@ -1323,27 +1330,27 @@ details p {
   }
 
   .modal-nav {
-    top: auto;
-    bottom: 22px;
+    top: 50%;
+    bottom: auto;
     height: 46px;
-    width: 56px;
+    width: 44px;
     font-size: 34px;
-    transform: none;
+    transform: translateY(-50%);
   }
 
   .modal-nav.prev {
-    left: 22px;
+    left: 10px;
     right: auto;
   }
 
   .modal-nav.next {
-    right: 22px;
+    right: 10px;
     left: auto;
   }
 
   .modal-nav:hover,
   .modal-nav:focus-visible {
-    transform: none;
+    transform: translateY(-50%) scale(1.04);
   }
 
   .modal-close {

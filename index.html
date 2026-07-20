@@ -283,10 +283,13 @@
     <canvas class="particle-canvas" aria-hidden="true"></canvas>
     <div class="modal-backdrop" data-close-modal></div>
     <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-nav prev" type="button" aria-label="이전 이미지">‹</button>
       <figure class="modal-figure">
         <button class="modal-close" type="button" aria-label="팝업 닫기" data-close-modal>&times;</button>
-        <img class="modal-image" src="Product_Image/번뇌타파 부적.jpg" alt="번뇌타파 부적 확대 이미지">
+        <div class="modal-image-wrap">
+          <button class="modal-nav prev" type="button" aria-label="이전 이미지">‹</button>
+          <img class="modal-image" src="Product_Image/번뇌타파 부적.jpg" alt="번뇌타파 부적 확대 이미지">
+          <button class="modal-nav next" type="button" aria-label="다음 이미지">›</button>
+        </div>
         <figcaption>
           <strong id="modalTitle">번뇌타파 부적</strong>
           <span class="modal-kicker">번뇌는 타파하고, 마음에는 평안 입주 완료.</span>
@@ -304,7 +307,6 @@
           <a class="modal-link" href="https://sgwon.or.kr/main/main.php" target="_blank" rel="noopener noreferrer">구경하러 가기</a>
         </figcaption>
       </figure>
-      <button class="modal-nav next" type="button" aria-label="다음 이미지">›</button>
     </section>
   </div>
 
