@@ -206,8 +206,7 @@ function initializeScrollReveal() {
   revealElements.forEach((element) => {
     element.dataset.revealState = "hidden";
     element.dataset.revealDirection = scrollDirection;
-    element.dataset.lastRevealAt = "0";
-    element.classList.add("scroll-down");
+    setRevealDirection(element);
   });
 
   requestRevealUpdate();
@@ -258,22 +257,22 @@ function updateRevealElements() {
 
     const directionChanged = element.dataset.revealDirection !== scrollDirection;
     const isHidden = element.dataset.revealState !== "visible";
-    const now = performance.now();
-    const lastRevealAt = Number(element.dataset.lastRevealAt || 0);
-    const canReplay = now - lastRevealAt > 520;
 
-    if (isHidden || (directionChanged && canReplay)) {
-      playRevealAnimation(element, now);
+    if (isHidden || directionChanged) {
+      playRevealAnimation(element);
     }
   });
 }
 
-function playRevealAnimation(element, revealedAt) {
-  element.dataset.revealState = "visible";
+function setRevealDirection(element) {
   element.dataset.revealDirection = scrollDirection;
-  element.dataset.lastRevealAt = String(revealedAt);
   element.classList.toggle("scroll-down", scrollDirection === "down");
   element.classList.toggle("scroll-up", scrollDirection === "up");
+}
+
+function playRevealAnimation(element) {
+  element.dataset.revealState = "visible";
+  setRevealDirection(element);
   element.classList.remove("is-visible");
   void element.offsetWidth;
   element.classList.add("is-visible");
