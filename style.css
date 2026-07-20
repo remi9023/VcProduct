@@ -203,6 +203,11 @@ h1 {
   white-space: nowrap;
 }
 
+.title-line {
+  display: block;
+  word-break: keep-all;
+}
+
 h2 {
   margin: 0;
   font-size: clamp(28px, 4vw, 46px);
@@ -1238,6 +1243,14 @@ details p {
 
   .intro-block {
     text-align: left;
+  }
+
+  .title-line {
+    display: inline;
+  }
+
+  .title-line + .title-line::before {
+    content: " ";
   }
 
   .intro-block p {
