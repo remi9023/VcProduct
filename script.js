@@ -160,6 +160,7 @@ let shockwaves = [];
 let particleFrame = null;
 let lastScrollY = window.scrollY;
 let scrollDirection = "down";
+let revealFrame = null;
 
 menuButton.addEventListener("click", () => {
   const isOpen = header.classList.toggle("menu-open");
@@ -196,41 +197,30 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") showProduct(currentIndex + 1, true);
 });
 
-window.addEventListener("resize", resizeCanvas);
-window.addEventListener("scroll", updateScrollDirection, { passive: true });
+window.addEventListener("resize", handleResize);
+window.addEventListener("scroll", handleScroll, { passive: true });
 document.addEventListener("click", showClickEffect);
 initializeScrollReveal();
 
 function initializeScrollReveal() {
-  if (!("IntersectionObserver" in window)) {
-    revealElements.forEach((element) => element.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const target = entry.target;
-
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-        target.classList.toggle("scroll-down", scrollDirection === "down");
-        target.classList.toggle("scroll-up", scrollDirection === "up");
-        target.classList.add("is-visible");
-        return;
-      }
-
-      if (!entry.isIntersecting && isRevealElementOutsideViewport(target)) {
-        target.classList.remove("is-visible");
-      }
-    });
-  }, {
-    threshold: [0, 0.12, 0.24],
-    rootMargin: "-6% 0px -6% 0px",
-  });
-
   revealElements.forEach((element) => {
+    element.dataset.revealState = "hidden";
+    element.dataset.revealDirection = scrollDirection;
+    element.dataset.lastRevealAt = "0";
     element.classList.add("scroll-down");
-    observer.observe(element);
   });
+
+  requestRevealUpdate();
+}
+
+function handleResize() {
+  resizeCanvas();
+  requestRevealUpdate();
+}
+
+function handleScroll() {
+  updateScrollDirection();
+  requestRevealUpdate();
 }
 
 function updateScrollDirection() {
@@ -241,11 +231,52 @@ function updateScrollDirection() {
   lastScrollY = currentScrollY;
 }
 
-function isRevealElementOutsideViewport(element) {
-  const rect = element.getBoundingClientRect();
-  const buffer = 48;
+function requestRevealUpdate() {
+  if (revealFrame) return;
 
-  return rect.bottom < -buffer || rect.top > window.innerHeight + buffer;
+  revealFrame = requestAnimationFrame(() => {
+    revealFrame = null;
+    updateRevealElements();
+  });
+}
+
+function updateRevealElements() {
+  const viewportHeight = window.innerHeight;
+
+  revealElements.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    const isInPlayZone = rect.top < viewportHeight * 0.86 && rect.bottom > viewportHeight * 0.14;
+    const isOutOfResetZone = rect.bottom < viewportHeight * 0.04 || rect.top > viewportHeight * 0.96;
+
+    if (isOutOfResetZone) {
+      element.dataset.revealState = "hidden";
+      element.classList.remove("is-visible");
+      return;
+    }
+
+    if (!isInPlayZone) return;
+
+    const directionChanged = element.dataset.revealDirection !== scrollDirection;
+    const isHidden = element.dataset.revealState !== "visible";
+    const now = performance.now();
+    const lastRevealAt = Number(element.dataset.lastRevealAt || 0);
+    const canReplay = now - lastRevealAt > 520;
+
+    if (isHidden || (directionChanged && canReplay)) {
+      playRevealAnimation(element, now);
+    }
+  });
+}
+
+function playRevealAnimation(element, revealedAt) {
+  element.dataset.revealState = "visible";
+  element.dataset.revealDirection = scrollDirection;
+  element.dataset.lastRevealAt = String(revealedAt);
+  element.classList.toggle("scroll-down", scrollDirection === "down");
+  element.classList.toggle("scroll-up", scrollDirection === "up");
+  element.classList.remove("is-visible");
+  void element.offsetWidth;
+  element.classList.add("is-visible");
 }
 
 function showClickEffect(event) {
