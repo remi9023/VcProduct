@@ -159,7 +159,7 @@ let particles = [];
 let shockwaves = [];
 let particleFrame = null;
 let lastScrollY = window.scrollY;
-let scrollDirection = "down";
+let scrollDirection = "up";
 let revealFrame = null;
 let shouldReplayVisibleReveal = false;
 
