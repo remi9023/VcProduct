@@ -161,6 +161,7 @@ let particleFrame = null;
 let lastScrollY = window.scrollY;
 let scrollDirection = "down";
 let revealFrame = null;
+let shouldReplayVisibleReveal = false;
 
 menuButton.addEventListener("click", () => {
   const isOpen = header.classList.toggle("menu-open");
@@ -218,28 +219,35 @@ function handleResize() {
 }
 
 function handleScroll() {
-  updateScrollDirection();
-  requestRevealUpdate();
+  if (!updateScrollDirection()) return;
+
+  requestRevealUpdate(true);
 }
 
 function updateScrollDirection() {
   const currentScrollY = window.scrollY;
-  if (Math.abs(currentScrollY - lastScrollY) < 4) return;
+  if (currentScrollY === lastScrollY) return false;
 
   scrollDirection = currentScrollY >= lastScrollY ? "down" : "up";
   lastScrollY = currentScrollY;
+  return true;
 }
 
-function requestRevealUpdate() {
+function requestRevealUpdate(replayVisible = false) {
+  shouldReplayVisibleReveal = shouldReplayVisibleReveal || replayVisible;
+
   if (revealFrame) return;
 
   revealFrame = requestAnimationFrame(() => {
+    const replayVisibleReveal = shouldReplayVisibleReveal;
+
     revealFrame = null;
-    updateRevealElements();
+    shouldReplayVisibleReveal = false;
+    updateRevealElements(replayVisibleReveal);
   });
 }
 
-function updateRevealElements() {
+function updateRevealElements(replayVisible = false) {
   const viewportHeight = window.innerHeight;
 
   revealElements.forEach((element) => {
@@ -255,10 +263,9 @@ function updateRevealElements() {
 
     if (!isInPlayZone) return;
 
-    const directionChanged = element.dataset.revealDirection !== scrollDirection;
     const isHidden = element.dataset.revealState !== "visible";
 
-    if (isHidden || directionChanged) {
+    if (isHidden || replayVisible) {
       playRevealAnimation(element);
     }
   });
