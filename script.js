@@ -211,20 +211,20 @@ function initializeScrollReveal() {
     entries.forEach((entry) => {
       const target = entry.target;
 
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
         target.classList.toggle("scroll-down", scrollDirection === "down");
         target.classList.toggle("scroll-up", scrollDirection === "up");
         target.classList.add("is-visible");
         return;
       }
 
-      if (isRevealElementWellOutsideViewport(target)) {
+      if (!entry.isIntersecting && isRevealElementOutsideViewport(target)) {
         target.classList.remove("is-visible");
       }
     });
   }, {
-    threshold: 0,
-    rootMargin: "-18% 0px -18% 0px",
+    threshold: [0, 0.12, 0.24],
+    rootMargin: "-6% 0px -6% 0px",
   });
 
   revealElements.forEach((element) => {
@@ -241,9 +241,9 @@ function updateScrollDirection() {
   lastScrollY = currentScrollY;
 }
 
-function isRevealElementWellOutsideViewport(element) {
+function isRevealElementOutsideViewport(element) {
   const rect = element.getBoundingClientRect();
-  const buffer = Math.max(160, window.innerHeight * 0.18);
+  const buffer = 48;
 
   return rect.bottom < -buffer || rect.top > window.innerHeight + buffer;
 }
