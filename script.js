@@ -6,6 +6,7 @@ const revealElements = document.querySelectorAll(".reveal-on-scroll");
 const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
+const modalKicker = document.querySelector(".modal-kicker");
 const modalDescription = document.querySelector(".modal-description");
 const modalProductTitle = document.querySelector(".modal-product-title");
 const modalProductCopy = document.querySelector(".modal-product-copy");
@@ -149,6 +150,66 @@ const products = [
       "행복한 소식이 있다면 적어서 자랑하고, 행복한 소식이 없다면 일단 '행복 예정'이라고 써두면 됩니다.",
       "※ 폭죽은 그림이며 실제로 터지지 않습니다. 안심하고 사무실에서 사용하세요.",
       "※ 행복이 팡팡 터지지 않을 경우 간식과 함께 사용해 보세요.",
+    ],
+    price: "추후 공개",
+  },
+  {
+    title: "감천마을 피우리 키링",
+    src: "Product_Image/감천마을 피우리 키링.png",
+    description: "부산의 골목과 바다, 그리고 피우리까지 한 번에 달았습니다.",
+    displayCopy: "알록달록 감천마을과 귀여운 피우리를 가방에 달고 부산 한 조각을 데려가세요.",
+    detailTitle: "부산 한 조각, 피우리 한 스푼",
+    detailCopy: [
+      "알록달록한 집들이 층층이 이어지고, 골목마다 이야기가 숨어 있는 감천문화마을. 그 풍경 속에 피우리가 슬쩍 자리 잡았습니다.",
+      "감천마을 피우리 키링은 감천마을의 다채로운 마을 풍경과 부산을 상징하는 바다, 광안대교의 이미지를 피우리와 함께 담아낸 아크릴 키링입니다.",
+      "지붕 위에 나란히 앉은 피우리와 친구들의 모습이 더해져, 부산 여행의 추억을 귀엽고 재치 있게 간직할 수 있습니다.",
+      "가방이나 파우치, 열쇠에 달아두면 언제 어디서든 감천마을 한 조각을 데리고 다니는 기분. 부산을 다녀온 사람에게는 추억을, 아직 가보지 못한 사람에게는 여행 욕구를 슬쩍 자극해주는 휴대용 부산 풍경 굿즈입니다.",
+    ],
+    price: "추후 공개",
+  },
+  {
+    title: "피우리 모래사장 키링",
+    src: "Product_Image/피우리 모래사장 키링.png",
+    description: "몸은 일상에 있어도, 마음은 피우리와 모래놀이 중.",
+    displayCopy: "바다와 모래사장, 신난 피우리까지 가방에 달고 작은 휴가를 챙겨가세요.",
+    detailTitle: "피우리와 함께하는 휴대용 해변 휴가",
+    detailCopy: [
+      "파도 소리 들리는 모래사장에 앉아 모래성을 쌓는 피우리.",
+      "피우리 모래사장 키링은 부산 바다의 여유로운 풍경과 해변에서 신나게 모래놀이를 즐기는 피우리의 모습을 담은 아크릴 키링입니다.",
+      "푸른 바다와 모래사장, 정자와 갈매기까지 한 장면에 담겨 있어, 가방에 달기만 해도 마음만큼은 바로 해변으로 출발합니다.",
+      "현실에서는 일정에 치이고 업무에 쫓기더라도, 피우리만큼은 모래성을 쌓으며 제대로 쉬는 중. 바쁜 하루 속 잠깐의 여유와 즐거운 여행의 추억을 귀엽게 간직할 수 있는 휴대용 바캉스 굿즈입니다.",
+      "가방이나 파우치, 열쇠에 달아두고 답답할 때마다 한 번씩 바라보세요. 당장 바다로 떠날 수는 없어도, 적어도 마음속 휴가 신청은 가능합니다.",
+    ],
+    price: "추후 공개",
+  },
+  {
+    title: "피우리 광안대교 키링",
+    src: "Product_Image/피우리 광안대교 키링.png",
+    description: "파도는 거세도 피우리는 평온하다. 부산 바다 휴대 완료.",
+    displayCopy: "광안대교와 부산 바다, 태평한 피우리까지 가방에 한 번에 달아보세요.",
+    detailTitle: "파도는 넘실대고, 피우리는 수행 중",
+    detailCopy: [
+      "부산의 밤과 바다를 대표하는 광안대교 아래, 피우리가 파도를 타고 있습니다.",
+      "피우리 광안대교 키링은 광안대교와 부산 바다의 시원한 풍경, 그리고 물결 위에서도 평온하게 웃고 있는 피우리의 모습을 담은 아크릴 키링입니다.",
+      "파도는 제법 거세 보이지만 피우리는 흔들림 없이 태연합니다. 보는 사람만 조금 걱정될 뿐입니다.",
+      "가방이나 파우치에 달아두면 부산 바다의 시원함과 피우리의 무근본 평온함을 언제든 함께 데리고 다닐 수 있습니다.",
+      "일상이 파도처럼 몰아치는 날에도 피우리를 보며 한 번쯤 생각해 보세요.",
+      "\"저 정도 파도에도 웃는데, 나도 오늘은 버텨보자.\"",
+    ],
+    price: "추후 공개",
+  },
+  {
+    title: "피우리 서핑 키링",
+    src: "Product_Image/피우리 서핑 키링.png",
+    description: "파도는 못 막아도, 올라탈 기세는 챙겨드립니다.",
+    displayCopy: "몰아치는 일상도 피우리처럼 신나게 타보세요. 기세만큼은 이미 프로 서퍼입니다.",
+    detailTitle: "인생의 파도? 일단 타고 봅니다",
+    detailCopy: [
+      "잔잔한 날만 기다리다가는 평생 해변에 서 있을지도 모릅니다. 파도가 왔다면 피우리처럼 냅다 올라타 보세요.",
+      "피우리 서핑 키링은 거대한 파도를 타며 자신감 넘치는 표정을 짓고 있는 피우리의 모습을 담은 아크릴 키링입니다.",
+      "선캡까지 야무지게 눌러쓰고 자세를 잡은 모습에서 실력보다 기세가 중요하다는 생활의 지혜를 배울 수 있습니다.",
+      "가방이나 열쇠에 달아두고 예상치 못한 일이 밀려올 때마다 피우리를 바라보세요. 상황을 잠재우지는 못하지만, 적어도 파도에 휩쓸리는 대신 타고 있는 척할 용기는 드립니다.",
+      "잘 타면 서핑이고, 못 타면 경험이며, 넘어져도 다시 올라가면 콘텐츠입니다.",
     ],
     price: "추후 공개",
   },
@@ -370,6 +431,7 @@ function showProduct(index, animate) {
   modalImage.src = product.src;
   modalImage.alt = `${product.title} 확대 이미지`;
   modalTitle.textContent = product.title;
+  modalKicker.textContent = product.displayCopy || product.description;
   modalDescription.textContent = product.description;
   modalProductTitle.textContent = product.detailTitle;
   modalProductCopy.replaceChildren(...product.detailCopy.map((paragraph) => {

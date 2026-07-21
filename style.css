@@ -855,9 +855,9 @@ details p {
 
 .modal-figure figcaption {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 38%);
   gap: 8px 18px;
-  align-items: center;
+  align-items: start;
   padding: 16px 4px 0;
 }
 
@@ -872,12 +872,19 @@ details p {
 
 .modal-kicker {
   justify-self: end;
+  max-width: 360px;
+  text-align: right;
   font-size: 14px;
+  line-height: 1.6;
+  word-break: keep-all;
 }
 
 .modal-description {
-  grid-column: 1 / -1;
-  margin: 2px 0 0;
+  grid-column: 1;
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+  word-break: keep-all;
 }
 
 .modal-product-detail {
@@ -1321,6 +1328,12 @@ details p {
 
   .modal-kicker {
     justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
+  .modal-description {
+    grid-column: 1;
   }
 
   .modal-product-detail {
