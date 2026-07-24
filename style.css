@@ -175,6 +175,70 @@ a {
   padding-bottom: 52px;
 }
 
+.hero-scroll-strip {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 0;
+  background: rgba(251, 253, 248, 0.94);
+  border-color: var(--line);
+  border-style: solid;
+  border-width: 0;
+}
+
+.hero-scroll-strip::before,
+.hero-scroll-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: min(12vw, 140px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-scroll-strip::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg), rgba(251, 253, 248, 0));
+}
+
+.hero-scroll-strip::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg), rgba(251, 253, 248, 0));
+}
+
+.hero-scroll-strip-top {
+  border-bottom-width: 1px;
+}
+
+.hero-scroll-strip-bottom {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.scroll-strip-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  padding-left: 14px;
+  animation: scrollStripLeft 54s linear infinite;
+  will-change: transform;
+}
+
+.hero-scroll-strip-bottom .scroll-strip-track {
+  animation-name: scrollStripRight;
+  animation-duration: 46s;
+}
+
+.scroll-strip-track img {
+  flex: 0 0 auto;
+  width: clamp(74px, 7vw, 118px);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid rgba(125, 194, 66, 0.28);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(70, 126, 35, 0.12);
+}
+
 .eyebrow {
   margin: 0 0 12px;
   color: var(--accent);
@@ -1099,12 +1163,36 @@ details p {
   }
 }
 
+@keyframes scrollStripLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollStripRight {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
   .reveal-on-scroll.is-visible {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .scroll-strip-track {
+    animation: none;
   }
 }
 
@@ -1199,6 +1287,20 @@ details p {
 @media (max-width: 680px) {
   h1 {
     font-size: clamp(20px, 5.5vw, 38px);
+  }
+
+  .hero-scroll-strip {
+    padding: 10px 0;
+  }
+
+  .scroll-strip-track {
+    gap: 10px;
+    padding-left: 10px;
+  }
+
+  .scroll-strip-track img {
+    width: 64px;
+    border-radius: 6px;
   }
 
   .single-line-title {
