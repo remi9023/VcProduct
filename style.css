@@ -195,7 +195,7 @@ h1 {
   max-width: none;
   margin: 0;
   font-size: clamp(38px, 5vw, 76px);
-  line-height: 1.18;
+  line-height: 1.28;
 }
 
 .hero-title-line {
@@ -291,7 +291,7 @@ h3 {
 .hero-product-card div {
   display: grid;
   gap: 4px;
-  padding: 16px 4px 2px;
+  padding: 16px 4px 4px;
 }
 
 .hero-product-card strong {
@@ -299,8 +299,9 @@ h3 {
 }
 
 .hero-product-card span {
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .visual-frame {
