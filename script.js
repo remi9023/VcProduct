@@ -3,6 +3,7 @@ const menuButton = document.querySelector(".menu-button");
 const navLinks = document.querySelectorAll(".nav a");
 const galleryItems = [...document.querySelectorAll(".gallery-item")];
 const revealElements = document.querySelectorAll(".reveal-on-scroll");
+const scrollStripTracks = document.querySelectorAll("[data-scroll-strip]");
 const modal = document.querySelector(".product-modal");
 const modalImage = document.querySelector(".modal-image");
 const modalTitle = document.querySelector("#modalTitle");
@@ -262,6 +263,8 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("resize", handleResize);
 window.addEventListener("scroll", handleScroll, { passive: true });
 document.addEventListener("click", showClickEffect);
+fillScrollStrips();
+window.addEventListener("load", fillScrollStrips);
 initializeScrollReveal();
 
 function initializeScrollReveal() {
@@ -276,7 +279,34 @@ function initializeScrollReveal() {
 
 function handleResize() {
   resizeCanvas();
+  fillScrollStrips();
   requestRevealUpdate();
+}
+
+function fillScrollStrips() {
+  scrollStripTracks.forEach((track) => {
+    const originalItems = [...track.querySelectorAll("img:not([data-clone])")];
+    const strip = track.closest(".hero-scroll-strip");
+
+    if (!originalItems.length || !strip) return;
+
+    track.querySelectorAll("[data-clone]").forEach((clone) => clone.remove());
+
+    const originalWidth = track.scrollWidth;
+    const minimumWidth = strip.clientWidth + originalWidth * 2;
+    let guard = 0;
+
+    track.style.setProperty("--strip-distance", `${originalWidth}px`);
+
+    while (track.scrollWidth < minimumWidth && guard < 12) {
+      originalItems.forEach((item) => {
+        const clone = item.cloneNode(true);
+        clone.dataset.clone = "true";
+        track.appendChild(clone);
+      });
+      guard += 1;
+    }
+  });
 }
 
 function handleScroll() {

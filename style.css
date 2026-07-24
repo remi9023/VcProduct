@@ -175,14 +175,17 @@ a {
   padding-bottom: 52px;
 }
 
+.hero-copy {
+  min-width: 0;
+}
+
 .hero-scroll-strip {
   position: relative;
   overflow: hidden;
-  padding: 14px 0;
-  background: rgba(251, 253, 248, 0.94);
-  border-color: var(--line);
-  border-style: solid;
-  border-width: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 0;
+  background: transparent;
 }
 
 .hero-scroll-strip::before,
@@ -207,12 +210,11 @@ a {
 }
 
 .hero-scroll-strip-top {
-  border-bottom-width: 1px;
+  margin: 0 0 38px;
 }
 
 .hero-scroll-strip-bottom {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
+  margin: 44px 0 0;
 }
 
 .scroll-strip-track {
@@ -220,7 +222,7 @@ a {
   width: max-content;
   gap: 14px;
   padding-left: 14px;
-  animation: scrollStripLeft 54s linear infinite;
+  animation: scrollStripLeft 58s linear infinite;
   will-change: transform;
 }
 
@@ -231,7 +233,7 @@ a {
 
 .scroll-strip-track img {
   flex: 0 0 auto;
-  width: clamp(74px, 7vw, 118px);
+  width: clamp(62px, 5.4vw, 92px);
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border: 1px solid rgba(125, 194, 66, 0.28);
@@ -1169,13 +1171,13 @@ details p {
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(var(--strip-distance, 50%) * -1));
   }
 }
 
 @keyframes scrollStripRight {
   from {
-    transform: translateX(-50%);
+    transform: translateX(calc(var(--strip-distance, 50%) * -1));
   }
 
   to {
